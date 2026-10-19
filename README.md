@@ -7,7 +7,7 @@ No install or build step is needed. The page and emoji assets are in `lyric_popu
 ## Quick start
 
 1. Open `lyric_popup.html` in Chrome, Edge, Firefox or Safari.
-2. Select a song with **Song audio**.
+2. Select a song with **Choose song audio**. On iPhone, tap the audio picker and choose **Browse** to select an audio file downloaded in the Files app (On My iPhone or iCloud Drive). The Apple Music library and streaming tracks are protected and are not available to web pages.
 3. Import timestamped lyrics (`.lrc`, `.txt`, or `.json`) or paste them into the **Lyrics** box.
 4. Press **Play**, or open **Record mode** and start your screen recorder.
 
@@ -33,7 +33,7 @@ You can also paste or load a JSON array of timestamped lines:
 ]
 ```
 
-Use the lyrics file picker to load an `.lrc`, `.txt`, or `.json` file. Choose any browser-supported audio file with **Song audio**. A missing opening `[` before a timestamp is also accepted.
+Use the lyrics file picker to load an `.lrc`, `.txt`, or `.json` file. Choose any browser-supported audio file with **Choose song audio**. A missing opening `[` before a timestamp is also accepted.
 
 ## Controls
 
@@ -48,7 +48,7 @@ Use the lyrics file picker to load an `.lrc`, `.txt`, or `.json` file. Choose an
 | Next | Shows the next line. The popup's OK button and the × do the same. |
 | Restart | Goes back to the first line. |
 | Seconds per line | How long each untimed line stays up (0.6 to 6 seconds). |
-| Song audio | Plays the selected song; timestamped lyrics stay synced to its position. |
+| Choose song audio | Selects a local MP3, M4A, AAC, WAV, AIFF, CAF, or MP4 audio file; timestamped lyrics stay synced to it. On iPhone, use Browse in the Files picker. |
 | Record mode | Hides the editor and fills the screen with the 9:16 frame. |
 
 ### Keyboard shortcuts (outside the text boxes)
@@ -90,7 +90,7 @@ A `!` in front of a normal emoji turns it black. You can use any emoji this way,
 1. Click **Record mode**. The page goes full screen and shows a 9:16 frame in the middle.
 2. Start your screen recorder (OBS, the Windows Game Bar, macOS screen recording, or your phone's recorder if you open the page there).
 3. Press **Space** to play. Press **Space** again to pause, or **Esc** to leave.
-4. Crop the recording to the centre 9:16 frame in your video editor (CapCut, DaVinci Resolve, and similar) and add your song audio there if you did not use the **Song audio** box.
+4. Crop the recording to the centre 9:16 frame in your video editor (CapCut, DaVinci Resolve, and similar) and add your song audio there if you did not use the **Choose song audio** box.
 
 Tip: to line a line up with the beat, set **Seconds per line** to match the song, or press the right arrow at each beat instead of using Play.
 

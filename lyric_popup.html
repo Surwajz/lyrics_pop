@@ -172,9 +172,10 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
     </div>
 
     <div class="card">
-      <label for="audioFile">Song audio (plays in sync with timestamped lyrics)</label>
-      <input type="file" id="audioFile" accept="audio/*">
+      <label for="audioFile">Choose song audio (MP3, M4A, AAC, WAV)</label>
+      <input type="file" id="audioFile" accept="audio/*,.mp3,.m4a,.aac,.wav,.aiff,.caf,.mp4">
       <audio id="audio" controls preload="metadata"></audio>
+      <p class="hint" id="audioStatus">On iPhone, choose a downloaded audio file from Browse in the Files picker. Apple Music streaming/library tracks are protected and cannot be selected by websites.</p>
       <div class="row"><button class="btn" id="rec">Record mode (9:16 full screen)</button></div>
       <p class="hint">Record mode hides this panel and fills the screen with the 9:16 frame. Space plays or pauses, the right arrow goes to the next line, Esc leaves.</p>
     </div>
@@ -436,6 +437,7 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
     stop();
     if (audioObjectUrl) URL.revokeObjectURL(audioObjectUrl);
     audioObjectUrl = URL.createObjectURL(f); a.src = audioObjectUrl; a.load();
+    $('audioStatus').textContent = 'Selected: ' + f.name + '. Press Play when ready.';
   };
   $('audio').addEventListener('play', syncToAudio);
   $('audio').addEventListener('timeupdate', syncToAudio);
@@ -450,6 +452,7 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
     clearInterval(timer); timer = null; playing = false; $('play').textContent = 'Play';
   });
   $('audio').addEventListener('error', function () {
+    $('audioStatus').textContent = 'This audio file could not be played by your browser. Try an MP3, M4A, AAC, or WAV file.';
     $('lyricStatus').textContent = 'Audio could not be loaded. Choose an audio file supported by your browser.';
   });
 
