@@ -24,6 +24,8 @@ Each line in an `.lrc` file uses an LRC timestamp followed by the lyric text:
 
 The timestamps are minutes, seconds, and optional hundredths. You can also use `[hh:mm:ss.xx]`. While timestamped lyrics are playing, the popup follows the selected audio's playback position, including when you pause, seek forward or backward, or restart. Timestamp lookup uses a binary search over the sorted timestamps. Empty timestamp-only lines are treated as gaps. Keep every lyric line timestamped for audio sync; untimed lyrics continue to use **Seconds per line**.
 
+When pasting on a phone, line breaks are inserted automatically at each timestamp, even if the keyboard or source pastes the whole song as one line.
+
 You can also paste or load a JSON array of timestamped lines:
 
 ```json

@@ -271,6 +271,13 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
     SRC = SRC.replace('\u0001', '%TITLE%');
     $('wall').innerHTML = out;
   }
+  function normalizeTimestampLines(text) {
+    return text.replace(/\[?\d{1,3}:\d{2}(?::\d{2})?(?:[.,]\d+)?\]/g, function (timestamp, offset, source) {
+      return offset > 0 && source.charAt(offset - 1) !== '\n' && source.charAt(offset - 1) !== '\r'
+        ? '\n' + timestamp
+        : timestamp;
+    });
+  }
   function parse() {
     var source = $('lyrics').value.trim();
     var themeCounts = {}, recentEmojis = [];
@@ -295,7 +302,7 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
         return;
       }
     } else {
-      var rows = $('lyrics').value.split('\n');
+      var rows = normalizeTimestampLines($('lyrics').value).split(/\r\n?|\n/);
       lines = rows.map(function (raw, n) {
         raw = raw.trim();
         if (!raw) return null;
@@ -423,6 +430,20 @@ body.rec .stage { height: 100vh; border-radius: 0; max-width: 100vw; }
   };
   $('title').oninput = buildWall;
   ['input', 'click', 'keyup'].forEach(function (ev) { $('lyrics').addEventListener(ev, function () { parse(); previewCursor(); }); });
+  $('lyrics').addEventListener('paste', function () {
+    var ta = this;
+    setTimeout(function () {
+      var value = ta.value, start = ta.selectionStart, end = ta.selectionEnd;
+      var normalized = normalizeTimestampLines(value);
+      if (normalized !== value) {
+        var normalizedStart = normalizeTimestampLines(value.slice(0, start)).length;
+        var normalizedEnd = normalizeTimestampLines(value.slice(0, end)).length;
+        ta.value = normalized;
+        ta.setSelectionRange(normalizedStart, normalizedEnd);
+      }
+      parse(); previewCursor();
+    }, 0);
+  });
   $('lyricsFile').onchange = function () {
     var file = this.files && this.files[0]; if (!file) return;
     file.text().then(function (text) {
